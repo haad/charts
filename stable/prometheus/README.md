@@ -89,6 +89,7 @@ Parameter | Description | Default
 `kubeStateMetrics.image.tag` | kube-state-metrics container image tag | `v0.4.1`
 `kubeStateMetrics.image.pullPolicy` | kube-state-metrics container image pull policy | `IfNotPresent`
 `kubeStateMetrics.args` | kube-state-metrics container arguments | `{}`
+`kubeStateMetrics.image.collectors` | kube-state-metrics container collector arguments | `{}`
 `kubeStateMetrics.nodeSelector` | node labels for kube-state-metrics pod assignment | `{}`
 `kubeStateMetrics.podAnnotations` | annotations to be added to kube-state-metrics pods | `{}`
 `kubeStateMetrics.replicaCount` | desired number of kube-state-metrics pods | `1`

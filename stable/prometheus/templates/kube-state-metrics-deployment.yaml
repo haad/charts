@@ -27,12 +27,18 @@ spec:
         - name: {{ template "prometheus.name" . }}-{{ .Values.kubeStateMetrics.name }}
           image: "{{ .Values.kubeStateMetrics.image.repository }}:{{ .Values.kubeStateMetrics.image.tag }}"
           imagePullPolicy: "{{ .Values.kubeStateMetrics.image.pullPolicy }}"
-        {{- if .Values.kubeStateMetrics.args }}
+          {{- if or (.Values.kubeStateMetrics.collectors) (.Values.kubeStateMetrics.args) }}
           args:
+          {{- range $key, $value := .Values.kubeStateMetrics.collectors }}
+            {{- if $value }}
+            - --collectors={{ $key }}
+            {{- end }}
+          {{- end }}
+
           {{- range $key, $value := .Values.kubeStateMetrics.args }}
             - --{{ $key }}={{ $value }}
           {{- end }}
-        {{- end }}
+          {{- end }}
           ports:
             - name: metrics
               containerPort: 8080
